@@ -44,7 +44,7 @@ def update_grid_prompt(cycle: int, x: int, grid_prompt: List[List[str]]) -> List
         try:
             grid_prompt[(cycle - 1) // 40][(cycle - 1) % 40] = ' '
         except:
-            grid_prompt[0][(cycle - 1) % 40] = ' '
+            grid_prompt[0][(cycle - 1) % 40] = '#'
     return grid_prompt
 
 # initialize the register X to 1

@@ -1,0 +1,70 @@
+monkey0 = {
+    "starting_items": [54, 61, 97, 63, 74],
+    "operation": lambda x: x * 7,
+    "test": lambda x: x % 17 == 0,
+    "if_true": 5,
+    "if_false": 3,
+    "nb_actions": 0
+}
+
+monkey1 = {
+    "starting_items": [61, 70, 97, 64, 99, 83, 52, 87],
+    "operation": lambda x: x + 8,
+    "test": lambda x: x % 2 == 0,
+    "if_true": 7,
+    "if_false": 6,
+    "nb_actions": 0
+}
+
+monkey2 = {
+    "starting_items": [60, 67, 80, 65],
+    "operation": lambda x: x * 13,
+    "test": lambda x: x % 5 == 0,
+    "if_true": 1,
+    "if_false": 6,
+    "nb_actions": 0
+}
+
+monkey3 = {
+    "starting_items": [61, 70, 76, 69, 82, 56],
+    "operation": lambda x: x + 7,
+    "test": lambda x: x % 3 == 0,
+    "if_true": 5,
+    "if_false": 2,
+    "nb_actions": 0
+}
+
+monkey4 = {
+    "starting_items": [79, 98],
+    "operation": lambda x: x + 2,
+    "test": lambda x: x % 7 == 0,
+    "if_true": 0,
+    "if_false": 3,
+    "nb_actions": 0
+}
+monkey5 = {
+    "starting_items": [72, 79, 55],
+    "operation": lambda x: x + 1,
+    "test": lambda x: x % 13 == 0,
+    "if_true": 2,
+    "if_false": 1,
+    "nb_actions": 0
+}
+
+monkey6 = {
+    "starting_items": [63],
+    "operation": lambda x: x + 4,
+    "test": lambda x: x % 19 == 0,
+    "if_true": 7,
+    "if_false": 4,
+    "nb_actions": 0
+}
+
+monkey7 = {
+    "starting_items": [72, 51, 93, 63, 80, 86, 81],
+    "operation": lambda x: x * x,
+    "test": lambda x: x % 11 == 0,
+    "if_true": 0,
+    "if_false": 4,
+    "nb_actions": 0
+}
