@@ -68,8 +68,7 @@ def one_round_move_elves(grid, elves, round):
             index = next(i for i, pos in enumerate(elves) if pos[0] == xinit and pos[1] == yinit)
             elves[index] = (xnew, ynew)
             t=1
-    if (round + 1) == 903:
-        t=1
+  
     if set(elves_check) == set(elves):
         print(f"The first round where no elves moves is: {round + 1}")
         flag = 1
