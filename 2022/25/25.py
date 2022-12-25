@@ -31,11 +31,9 @@ carry = 0
 
 # Divide the decimal number by the base until the quotient is less than the base
 while abs(decimal_value + carry) > 0:
-    # Add the carry to the dividend
     dividend = decimal_value + carry
-    # Append the remainder to the result list
     remainder = dividend % len(SNAFU_to_base_10)
-    # Check if the remainder is outside the range of -2 to +2
+    # Check if the remainder is outside the range of -2 to +2 if its the case, add a carry ± 1 
     if remainder < min(base_10_to_SNAFU):
         remainder +=len(SNAFU_to_base_10)
         carry = -1
@@ -44,15 +42,29 @@ while abs(decimal_value + carry) > 0:
         carry = 1
     else:
         carry = 0
-    # Append the modified remainder to the result list
-    reconvert.append(base_10_to_SNAFU[remainder])
-    # Update the dividend for the next division
     decimal_value = dividend // len(SNAFU_to_base_10)
+    reconvert.append(base_10_to_SNAFU[remainder])
+    
 
-
-# Append the final quotient to the result list
 result = "".join(reversed(reconvert))
-
-
-    # Reverse the result list and join the digits to obtain the SNAFU number
+# Reverse the result list and join the digits to obtain the SNAFU number
 print(f"SNAFU number do you supply to Bob's console : {result}")
+
+#    ___  ___  _  _  ___  ___  ___  ___    ___    _    ___  ___    ___  ___   _  _ __   __ ___  ___  _____   ___ __  __   _    __  __  ___  _     ___ 
+#   / __|| __|| \| || __|| _ \|_ _|/ __|  | _ )  /_\  / __|| __|  / __|/ _ \ | \| |\ \ / /| __|| _ \|_   _| | __|\ \/ /  /_\  |  \/  || _ \| |   | __|
+#  | (_ || _| | .` || _| |   / | || (__   | _ \ / _ \ \__ \| _|  | (__| (_) || .` | \ V / | _| |   /  | |   | _|  >  <  / _ \ | |\/| ||  _/| |__ | _| 
+#   \___||___||_|\_||___||_|_\|___|\___|  |___//_/ \_\|___/|___|  \___|\___/ |_|\_|  \_/  |___||_|_\  |_|   |___|/_/\_\/_/ \_\|_|  |_||_|  |____||___|
+                                                                                                                                                    
+
+# Eg base 25:
+# def my_base25(decimal_number):
+#     base25_digits = []
+#     digits = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+#     while decimal_number > 0:
+#         base25_digits.append(decimal_number % 25)
+#         decimal_number //= 25
+#     base25_digits.reverse()
+#     base25_number = ''.join(digits[d] for d in base25_digits)
+#     return base25_number
+
+
