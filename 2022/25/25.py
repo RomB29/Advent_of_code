@@ -56,15 +56,14 @@ print(f"SNAFU number do you supply to Bob's console : {result}")
 #   \___||___||_|\_||___||_|_\|___|\___|  |___//_/ \_\|___/|___|  \___|\___/ |_|\_|  \_/  |___||_|_\  |_|   |___|/_/\_\/_/ \_\|_|  |_||_|  |____||___|
                                                                                                                                                     
 
-# Eg base 25:
-# def my_base25(decimal_number):
-#     base25_digits = []
-#     digits = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+# Eg base 8:
+# def my_base8(decimal_number):
+#     base8_digits = []
 #     while decimal_number > 0:
-#         base25_digits.append(decimal_number % 25)
-#         decimal_number //= 25
-#     base25_digits.reverse()
-#     base25_number = ''.join(digits[d] for d in base25_digits)
-#     return base25_number
+#         base8_digits.append(decimal_number % 8)
+#         decimal_number //= 8
+#     base8_digits.reverse()
+#     base8_number = ''.join(str(d) for d in base8_digits)
+#     return base8_number
 
 
