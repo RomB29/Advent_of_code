@@ -1,120 +1,95 @@
-import numpy as np
 import re
-file_path = "22.in"
 
-with open(file_path) as f:
-    datas = f.read().split("\n")
+grid = []
+done = False
 
-width = 0
-for columns in datas[:-2]:
-    width = max(width, len(columns))
+for line in open("22.in"):
+    line = line[:-1]
+    if line == "":
+        done = True
+    if done:
+        sequence = line
+    else:
+        grid.append(line)
 
-matrix = [line + " " * (width - len(line)) for line in datas]
+width = max(map(len, grid))
+grid = [line + " " * (width - len(line)) for line in grid]
 
+r = 0
+c = 0
+dr = 0
+dc = 1
 
-first_index = [i for i, val in enumerate(matrix[0]) if val == '.'][0]
+while grid[r][c] != ".":
+    c += 1
 
-x = 0
-y = (first_index - 1)
-facing = 0  # 0 = right, 1 = down, 2 = left, 3 = up
-
-def check_up_down_boundaries(x=None, y=None):
-
-    if y is not None and x is None:
-        column = [row[y] for row in matrix[:-2]]
-        boundaries = [pixel for pixel, y in enumerate(column) if y != ' ']
-
-    if x is not None and y is None:
-        column = [row for row in matrix[x]]
-        boundaries = [pixel for pixel, x in enumerate(column) if x != ' ']   
-
-    return boundaries[0], boundaries[-1]
-
-
-    
-
-
-input_instructions = matrix[-1]
-instructions = re.findall(r'(\d+)([RL]?)', input_instructions)
-
-for case, instr in instructions:
-    move = int(case)
-
-    while(move > 0):
-
-        if facing == 0: # right
-            if (y + 1 == width) or matrix[x][y + 1] == ' ':
-                ymin, ymax = check_up_down_boundaries(x, None)
-                y = ymin
-
-                if matrix[x][y] == '#':
-                    y = ymax
-                    break
-            else:
-                y += 1
-                
-
-        if facing == 1: # bottom
-            if (x + 1 == len(matrix[0:-2])) or matrix[x + 1][y] == ' ':
-                xmin, xmax  = check_up_down_boundaries(None, y)
-                x = xmin
-
-                if matrix[x][y] == '#':
-                    x = xmax
-                    break
-
-            else:
-                x += 1
-
-
-        if facing == 2: # left
-            if (y - 1 < 0) or matrix[x][y - 1] == ' ':
-                ymin, ymax = check_up_down_boundaries(x, None)
-                y = ymax
-
-                if matrix[x][y] == '#':
-                    y = ymin
-                    break
-            # elif y - 1 < 0:
-            #     y = (y - 1) % width
-            else:
-                y -= 1
-
-
-        if facing == 3: # up
-            if (x - 1 < 0) or matrix[x - 1][y] == ' ':
-                xmin, xmax = check_up_down_boundaries(None, y)
-                x = xmax
-
-                if matrix[x][y] == '#':
-                    x = xmin
-                    break
-
-            # elif (x - 1) < 0:
-            #     x = (x - 1) % len(matrix[:-2])
-            else:
-                x -= 1
-
-
-        if matrix[x][y] == "#":
-            if facing == 0:
-                y -= 1
-            if facing == 1:
-                x -= 1
-            if facing == 2:
-                y += 1
-            if facing == 3:
-                x += 1
+for x, y in re.findall(r"(\d+)([RL]?)", sequence):
+    x = int(x)
+    for _ in range(x):
+        cdr = dr
+        cdc = dc
+        nr = r + dr
+        nc = c + dc
+        if nr < 0 and 50 <= nc < 100 and dr == -1:
+            dr, dc = 0, 1
+            nr, nc = nc + 100, 0
+        elif nc < 0 and 150 <= nr < 200 and dc == -1:
+            dr, dc = 1, 0
+            nr, nc = 0, nr - 100
+        elif nr < 0 and 100 <= nc < 150 and dr == -1:
+            nr, nc = 199, nc - 100
+        elif nr >= 200 and 0 <= nc < 50 and dr == 1:
+            nr, nc = 0, nc + 100
+        elif nc >= 150 and 0 <= nr < 50 and dc == 1:
+            dc = -1
+            nr, nc = 149 - nr, 99
+        elif nc == 100 and 100 <= nr < 150 and dc == 1:
+            dc = -1
+            nr, nc = 149 - nr, 149
+        elif nr == 50 and 100 <= nc < 150 and dr == 1:
+            dr, dc = 0, -1
+            nr, nc = nc - 50, 99
+        elif nc == 100 and 50 <= nr < 100 and dc == 1:
+            dr, dc = -1, 0
+            nr, nc = 49, nr + 50
+        elif nr == 150 and 50 <= nc < 100 and dr == 1:
+            dr, dc = 0, -1
+            nr, nc = nc + 100, 49
+        elif nc == 50 and 150 <= nr < 200 and dc == 1:
+            dr, dc = -1, 0
+            nr, nc = 149, nr - 100
+        elif nr == 99 and 0 <= nc < 50 and dr == -1:
+            dr, dc = 0, 1
+            nr, nc = nc + 50, 50
+        elif nc == 49 and 50 <= nr < 100 and dc == -1:
+            dr, dc = 1, 0
+            nr, nc = 100, nr - 50
+        elif nc == 49 and 0 <= nr < 50 and dc == -1:
+            dc = 1
+            nr, nc = 149 - nr, 0
+        elif nc < 0 and 100 <= nr < 150 and dc == -1:
+            dc = 1
+            nr, nc = 149 - nr, 50
+        if grid[nr][nc] == "#":
+            dr = cdr
+            dc = cdc
             break
+        r = nr
+        c = nc
+    if y == "R":
+        dr, dc = dc, -dr
+    elif y == "L":
+        dr, dc = -dc, dr
 
-        move -= 1
-        
-    if instr == "R":
-        facing = (facing + 1) % 4
-    if instr == "L":
-        facing = (facing - 1) % 4
+if dr == 0:
+    if dc == 1:
+        k = 0
+    else:
+        k = 2
+else:
+    if dr == 1:
+        k = 1
+    else:
+        k = 3
 
-
-
-print(f"Final password is: {1000 * (x + 1) + 4 * (y + 1) + facing}")
-t=1
+print(1000 * (r + 1) + 4 * (c + 1) + k)
