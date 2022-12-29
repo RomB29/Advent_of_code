@@ -25,7 +25,7 @@ for line in open(filename, 'r'):
                 abyss = max(abyss, y + 1)
 total = 0
 floor = int(max(elements, key=lambda y: y.imag).imag) + 2
-for x in range(200, 800): # Arbitrary values
+for x in range(470, 520): # Arbitrary values
     elements.add(x + floor * 1j)
 
 #    _____    _                         __           __                                             __           ____            __    __    _                  
