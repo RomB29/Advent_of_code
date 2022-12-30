@@ -18,8 +18,9 @@ def calculatePath(board, start, end, mo=0):
             for j in range(w):
                 if timeMap[i][j] == m:
                     for di, dj in directions:
-                        if newBoard[i + di][j + dj] == '.':
-                            update.append([i + di, j + dj])
+                        if i + di < h and j + dj < w:
+                            if newBoard[i + di][j + dj] == '.':
+                                update.append([i + di, j + dj])
 
         for i, j in update:
             timeMap[i][j] = m + 1
@@ -61,3 +62,8 @@ d = [len(board) - 1, len(board[0]) - 2]
 directions = [[0, 0], [-1, 0], [+1, 0], [0, -1], [0, +1]]
 
 print(calculatePath(board, s, d))
+
+m1 = calculatePath(board, s, d, 0)
+m2 = calculatePath(board, d, s, m1)
+m3 = calculatePath(board, s, d, m1 + m2)
+print(m1 + m2 + m3)
