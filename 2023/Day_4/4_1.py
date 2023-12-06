@@ -44,8 +44,7 @@ def win_copies(data, card_number, copies, end):
         for i in range(1, len(winners) + 1):
             copies[f"Card {card_number + i}"] += 1
             win_copies(data, card_number + i, copies, end)
-    else:
-        return
+    return copies
 
 
 def part_2(data):
@@ -54,12 +53,13 @@ def part_2(data):
     end = len(data)
     card_number = 1
     for i in range(len(data)):
-        win_copies(data, card_number, copies, end)
+        copies = win_copies(data, card_number, copies, end)
         card_number += 1
 
     total_scratchcards = sum(copies.values())
     print(f"Total Scratchcards: {total_scratchcards}")
-    return total_scratchcards
+
+    return copies
 
 if __name__ == '__main__':
     part_1(data_parsed)
