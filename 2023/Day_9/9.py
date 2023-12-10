@@ -19,24 +19,23 @@ def compute(liste: list) -> list:
     return output
 
 def extrapolation_part_1(liste: list) -> list:
-    new_liste = list(reversed(liste))
+    new_liste = list(reversed(liste)) # Equivalent to liste[::-1]
     new_liste[0].append(0)
     for i_l, l in enumerate(new_liste[1:]):
        extrapo = l[-1] + new_liste[i_l][-1]
        new_liste[i_l + 1].append(extrapo)
 
-    output = new_liste[i_l + 1][-1]
-    return output
+    return new_liste[i_l + 1][-1]
+
 
 def extrapolate_backward(liste: list) -> list:
-    new_liste = list(reversed(liste))
+    new_liste = liste[::-1]
     new_liste[0].insert(0, 0)
     for i_l, l in enumerate(new_liste[1:]):
         extrapo = l[0] - new_liste[i_l][0]
         new_liste[i_l + 1].insert(0, extrapo)
 
-    output = new_liste[i_l + 1][0]
-    return output
+    return new_liste[i_l + 1][0]
 
 if __name__ == '__main__':
     part_1 = 0
