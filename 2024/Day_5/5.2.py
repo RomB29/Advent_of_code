@@ -31,7 +31,7 @@ def is_ordered(update):
     return True
 
 def cmp(x, y):
-    return cache.get((x, y), 0)
+    return cache.get((x, y), 0) # could be anything else than 0
 
 res = 0
 for update in list_update:
