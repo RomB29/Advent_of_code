@@ -150,6 +150,9 @@ for i_s, step in enumerate(steps):
     i, j = direction[0], direction[1]
     virtual_movement = check_move(j, i, robot_position)
 
+    for row in new_grid:
+        print("".join(row))
+
     if is_wall(new_grid, virtual_movement):
         continue
 
@@ -165,9 +168,9 @@ for i_s, step in enumerate(steps):
 
 
 part_2 = []
+
 for i in range(n):
     for j in range(2 * n):
         if new_grid[i][j] in box_pattern[0]:
             part_2.append(i * 100 + j)
 
-print(f"Solution part 2 : {sum(part_2)}")
