@@ -1,6 +1,9 @@
 from collections import defaultdict, Counter
+import time
 
 buyers = []
+start_time = time.time()
+
 with open("22.in") as f:
     for line in f:
         buyers.append(int(line.strip()))
@@ -62,8 +65,9 @@ for i in range(2000):
         t=1
 
 part_1 = sum(buyers)
+end_time = time.time()
 print(f"Résultat partie 1: {part_1}")
-
+print(f"Temps d'exécution: {end_time - start_time} secondes")
 
 # # List of tuples
 # list1 = [(3, 1), (0, -3), (2, 6), (5, -2), (4, -2), (4, 0), (6, 2), (4, -4), (4, 0), (2, -2)]
@@ -72,7 +76,7 @@ print(f"Résultat partie 1: {part_1}")
 # Combine the lists
 
 
-
+start_time = time.time()
 patterns = []
 test = []
 for seq in sequence:
@@ -98,3 +102,5 @@ sorted_value_sums = sorted(
 )
 
 print(f"Résultat partie 2: {sorted_value_sums[0][1]}")
+end_time = time.time()
+print(f"Temps d'exécution: {end_time - start_time} secondes")
