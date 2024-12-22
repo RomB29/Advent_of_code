@@ -13,15 +13,23 @@ def prune(secret_number):
     secret_number %= 16777216
     return secret_number
 
-def steps(secret_number):
-    step_1 = secret_number * 64
-    secret_number = prune(mix(secret_number, step_1))
-    step_2 = secret_number // 32
-    secret_number = prune(mix(secret_number, step_2))
-    step_3 = secret_number * 2048
-    secret_number = prune(mix(secret_number, step_3))
+# def steps(secret_number):
+#     step_1 = secret_number * 64
+#     secret_number = prune(mix(secret_number, step_1))
+#     step_2 = secret_number // 32
+#     secret_number = prune(mix(secret_number, step_2))
+#     step_3 = secret_number * 2048
+#     secret_number = prune(mix(secret_number, step_3))
 
-    return secret_number
+#     return secret_number
+
+def steps(num):
+    num = (num ^ (num << 6)) & 0xFFFFFF
+    num = (num ^ (num >> 5)) & 0XFFFFFF
+    num = (num ^ (num << 11)) & 0xFFFFFF
+    return num
+
+
 
 def get_last_digit(number):
     return int(str(number)[-1])
