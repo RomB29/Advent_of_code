@@ -78,10 +78,7 @@ test = []
 for seq in sequence:
     tuple0_values = [t[0] for t in seq]
     tuple1_values = [t[1] for t in seq]
-    patterns.append([(tuple0_values[i - 1], tuple(tuple1_values[i-4: i])) for i in range(3, len(tuple1_values))])
-    test.append([tuple(tuple1_values[i-4: i]) for i in range(3, len(tuple1_values))])
-    t=1
-
+    patterns.append([(tuple0_values[i - 1], tuple(tuple1_values[i - 4: i])) for i in range(3, len(tuple1_values))])
 
 pattern_counts = defaultdict(int)
 value_sums = defaultdict(int)
